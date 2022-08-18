@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { TQuestion } from '../types';
+import { Button, Text, Title } from '../../../components';
 
 interface QuestionProps {
   question: TQuestion;
@@ -13,19 +14,27 @@ export const Question: React.FC<QuestionProps> = ({
 }) => {
   return (
     <div className="flex flex-col space-y-12 flex-1">
-      <h2 className="text-4xl text-center">{category}</h2>
+      <Title level="2" className="text-center">
+        {category}
+      </Title>
 
       <div
         className={`
           flex justify-center items-center flex-1 px-12
-          border border-indigo-400 rounded-md text-2xl text-center
+          border border-indigo-500 rounded-md text-2xl text-center
         `}
-        dangerouslySetInnerHTML={{ __html: question }}
-      />
+      >
+        <Text level="1" dangerouslySetInnerHTML={{ __html: question }} />
+      </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <button onClick={() => onAnswer(true)}>True</button>
-        <button onClick={() => onAnswer(false)}>False</button>
+      <div className="grid grid-cols-2 gap-12">
+        <Button className="text-green-600 uppercase" onClick={() => onAnswer(true)}>
+          True
+        </Button>
+
+        <Button className="text-red-600 uppercase" onClick={() => onAnswer(false)}>
+          False
+        </Button>
       </div>
     </div>
   );

@@ -1,17 +1,24 @@
 import { useResults } from '../hooks';
 import { ResultItem } from '../components';
+import { Button, Title } from '../../../components';
 
 export const ResultsPage = () => {
   const { numberOfCorrectAnswers, questions, handlePlayAgain } = useResults();
 
   return (
-    <div className="flex flex-col space-y-8 pb-8">
+    <div className="flex flex-col space-y-16 pb-8">
       <div>
-        <h2 className="text-2xl text-center font-semibold">You scored</h2>
-        <h2 className="text-2xl text-center font-semibold">{`${numberOfCorrectAnswers} / ${questions.length}`}</h2>
+        <Title level="2" className="text-center">
+          You scored
+        </Title>
+
+        <Title
+          level="2"
+          className="text-center"
+        >{`${numberOfCorrectAnswers} / ${questions.length}`}</Title>
       </div>
 
-      <div className="flex flex-col justify-center flex-1 space-y-4">
+      <div className="flex flex-col justify-center flex-1 space-y-12">
         {questions.map((question) => (
           <ResultItem
             key={question.question}
@@ -22,12 +29,9 @@ export const ResultsPage = () => {
         ))}
       </div>
 
-      <button
-        onClick={handlePlayAgain}
-        className="h-16 w-1/4 self-center uppercase font-bold text-xl"
-      >
+      <Button onClick={handlePlayAgain} className="w-1/4 self-center uppercase">
         Play again?
-      </button>
+      </Button>
     </div>
   );
 };

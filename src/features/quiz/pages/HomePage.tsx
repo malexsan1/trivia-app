@@ -1,3 +1,5 @@
+import { Button, Title, Text } from '../../../components';
+
 import { useQuizHome } from '../hooks';
 import { QuizInProgressModal } from '../components';
 
@@ -7,20 +9,29 @@ export const HomePage = () => {
 
   return (
     <>
-      <h1 className="text-center mt-12">Welcome to the Trivia Challenge!</h1>
+      <Title level="1" className="text-center mt-12 text-">
+        Welcome to the Trivia Challenge!
+      </Title>
 
       <div className="flex flex-col flex-1 justify-center items-center space-y-8">
-        <p className="text-2xl">
-          You will be presented with 10 <span className="font-bold text-green-500">True</span> or{' '}
-          <span className="font-bold text-red-500">False</span> questions.
-        </p>
+        <Text level="1">
+          You will be presented with 10{' '}
+          <Text level="1" as="span" className="font-semibold text-green-600">
+            True
+          </Text>{' '}
+          or{' '}
+          <Text level="1" as="span" className="font-semibold text-red-600">
+            False
+          </Text>{' '}
+          questions.
+        </Text>
 
-        <p className="text-2xl">Can you score 100%?</p>
+        <Text level="1">Can you score 100%?</Text>
       </div>
 
-      <button className="self-center h-16 w-1/6 font-bold text-xl" onClick={handleQuizStart}>
+      <Button className="self-center w-1/6" onClick={handleQuizStart}>
         BEGIN
-      </button>
+      </Button>
 
       <QuizInProgressModal
         isOpen={isModalOpen}

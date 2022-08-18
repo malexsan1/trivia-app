@@ -1,5 +1,6 @@
 import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
+import { Text } from '../../../components';
 import { capitalize } from '../../../utils';
 
 interface ResultItemProps {
@@ -12,7 +13,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({ answer, correctAnswer, q
   const isCorrect = answer === correctAnswer;
 
   return (
-    <div className="flex items-start space-x-4">
+    <div className="flex items-center space-x-8">
       <div className="min-h-[1.5rem] min-w-[1.5rem]">
         {isCorrect ? (
           <IoAddCircle className="text-green-500 h-full w-full" />
@@ -22,12 +23,12 @@ export const ResultItem: React.FC<ResultItemProps> = ({ answer, correctAnswer, q
       </div>
 
       <div className="space-y-2">
-        <p className="text-lg" dangerouslySetInnerHTML={{ __html: question }} />
+        <Text level="2" dangerouslySetInnerHTML={{ __html: question }} />
 
         {!isCorrect && (
-          <p className="text-sm">
+          <Text level="3">
             Your answer: {capitalize(answer)}. The correct answer: {capitalize(correctAnswer)}
-          </p>
+          </Text>
         )}
       </div>
     </div>

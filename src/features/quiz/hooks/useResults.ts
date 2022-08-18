@@ -15,7 +15,7 @@ export const useResults = () => {
   }, []);
 
   const handlePlayAgain = () => {
-    navigate('/quiz');
+    navigate('/');
   };
 
   return {
