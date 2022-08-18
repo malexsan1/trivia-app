@@ -8,7 +8,7 @@ export const Quiz = () => {
     <>
       <Question question={currentQuestion} onAnswer={handleAnswer} />
 
-      <p className="mt-8 text-center">{`${currentQuestionIndex + 1} of 10`}</p>
+      <p className="mt-8 text-center font-semibold">{`${currentQuestionIndex + 1} of 10`}</p>
     </>
   );
 };

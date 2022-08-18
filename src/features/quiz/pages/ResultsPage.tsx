@@ -5,16 +5,19 @@ export const ResultsPage = () => {
   const { numberOfCorrectAnswers, questions, handlePlayAgain } = useResults();
 
   return (
-    <div className="flex flex-col flex-1">
-      <h2 className="text-2xl text-center font-semibold">You scored</h2>
-      <h2 className="text-2xl text-center font-semibold">{`${numberOfCorrectAnswers} / ${questions.length}`}</h2>
+    <div className="flex flex-col space-y-8 pb-8">
+      <div>
+        <h2 className="text-2xl text-center font-semibold">You scored</h2>
+        <h2 className="text-2xl text-center font-semibold">{`${numberOfCorrectAnswers} / ${questions.length}`}</h2>
+      </div>
 
-      <div className="flex flex-col justify-center flex-1 space-y-2">
+      <div className="flex flex-col justify-center flex-1 space-y-4">
         {questions.map((question) => (
           <ResultItem
             key={question.question}
+            answer={question.answer}
             question={question.question}
-            isCorrect={question.answer === question.correct_answer.toLowerCase()}
+            correctAnswer={question.correct_answer.toLowerCase()}
           />
         ))}
       </div>
