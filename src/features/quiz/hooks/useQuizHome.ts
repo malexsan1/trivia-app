@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { quizStorage } from '../../../lib';
+
 export const useQuizHome = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-  const isQuizInProgress = React.useMemo(() => !!localStorage.getItem('currentQuestionIndex'), []);
+  const isQuizInProgress = React.useMemo(() => quizStorage.questionIndex, []);
 
   const handleQuizStart = () => {
     if (isQuizInProgress) {
@@ -23,8 +24,7 @@ export const useQuizHome = () => {
   };
 
   const onStartNewQuiz = () => {
-    localStorage.removeItem('questions');
-    localStorage.removeItem('currentQuestionIndex');
+    quizStorage.clear();
     navigate('/quiz');
   };
 

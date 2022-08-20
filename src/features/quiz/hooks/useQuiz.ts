@@ -1,57 +1,65 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { TQuestion } from '../types';
-import { questions as dummyQuestions } from '../data';
-
-const fetchData = (): Promise<TQuestion[]> => {
-  return new Promise((resolve) => {
-    resolve(dummyQuestions);
-  });
-};
+import { TQuestion } from '../../../core/types';
+import { useRequestStatus } from '../../../hooks';
+import { quizFetcher, quizStorage } from '../../../lib';
 
 export const useQuiz = () => {
   const navigate = useNavigate();
+  const { isLoading, setRequestStatus, error } = useRequestStatus();
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(() => {
-    return JSON.parse(localStorage.getItem('currentQuestionIndex') ?? '0') as number;
-  });
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(
+    () => quizStorage.questionIndex,
+  );
 
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
-
-  React.useEffect(() => {
-    const storedQuestions = localStorage.getItem('questions');
-
-    // use the previously stores questions, do not fetch new ones
-    if (storedQuestions) {
-      setQuestions(JSON.parse(storedQuestions));
-    } else {
-      fetchData().then((_questions) => {
-        localStorage.setItem('questions', JSON.stringify(_questions));
-        setQuestions(_questions);
-      });
-    }
-  }, []);
 
   const handleAnswer = (answer: boolean) => {
     questions[currentQuestionIndex].answer = String(answer);
     setQuestions(questions);
+    quizStorage.saveQuestions(questions);
 
     if (currentQuestionIndex === questions.length - 1) {
       navigate('/results', { state: { questions } });
 
-      // clear storage for current quiz
-      localStorage.removeItem('questions');
-      localStorage.removeItem('currentQuestionIndex');
+      quizStorage.clear();
     } else {
       setCurrentQuestionIndex((idx) => idx + 1);
-      localStorage.setItem('currentQuestionIndex', JSON.stringify(currentQuestionIndex + 1));
+      quizStorage.setActiveIndex(currentQuestionIndex + 1);
     }
   };
 
+  const fetchNewQuestions = React.useCallback(async () => {
+    setRequestStatus({ error: '', status: 'loading' });
+    try {
+      const questions = await quizFetcher.fetchQuiz();
+
+      setQuestions(questions);
+      quizStorage.saveQuestions(questions);
+
+      setRequestStatus({ status: 'success', error: '' });
+    } catch (err: unknown) {
+      setRequestStatus({ status: 'error', error: (err as Error).message });
+    }
+  }, [setRequestStatus]);
+
+  React.useEffect(() => {
+    const storedQuestions = quizStorage.questions;
+
+    // use the previously stores questions, do not fetch new ones
+    if (storedQuestions.length > 0) {
+      setQuestions(storedQuestions);
+    } else {
+      fetchNewQuestions();
+    }
+  }, []);
+
   return {
-    handleAnswer,
+    error,
+    isLoading,
     currentQuestionIndex,
     currentQuestion: questions[currentQuestionIndex] ?? {},
+    handleAnswer,
   };
 };
