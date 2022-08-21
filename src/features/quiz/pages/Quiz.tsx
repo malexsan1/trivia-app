@@ -1,8 +1,9 @@
 import { FaSpinner, FaExclamationCircle } from 'react-icons/fa';
 
+import { Button, Title, Text } from 'components';
+
 import { useQuiz } from '../hooks';
 import { Question } from '../components';
-import { Button, Title, Text } from '../../../components';
 
 export const Quiz = () => {
   const {

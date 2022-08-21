@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { quizStorage } from '../../../lib';
+import { quizStorage } from 'lib';
 
 export const useQuizHome = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
-import { Text } from '../../../components';
-import { capitalize } from '../../../utils';
+import { Text } from 'components';
+import { capitalize } from 'utils';
 
 interface ResultItemProps {
   answer: string;

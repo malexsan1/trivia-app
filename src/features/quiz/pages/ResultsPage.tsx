@@ -1,6 +1,7 @@
+import { Button, Title } from 'components';
+
 import { useResults } from '../hooks';
 import { ResultItem } from '../components';
-import { Button, Title } from '../../../components';
 
 export const ResultsPage = () => {
   const { numberOfCorrectAnswers, questions, handlePlayAgain } = useResults();

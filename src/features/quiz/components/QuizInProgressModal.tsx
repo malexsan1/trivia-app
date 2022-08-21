@@ -1,6 +1,6 @@
 import { IoCloseCircleOutline } from 'react-icons/io5';
 
-import { Button, Modal, ModalProps, Text, Title } from '../../../components';
+import { Button, Modal, ModalProps, Text, Title } from 'components';
 
 export interface QuizInProgressModalProps extends ModalProps {
   onContinue(): void;

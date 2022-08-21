@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { TQuestion } from '../../../core/types';
-import { Button, Text, Title } from '../../../components';
+import { TQuestion } from 'core/types';
+import { Button, Text, Title } from 'components';
 
 interface QuestionProps {
   question: TQuestion;

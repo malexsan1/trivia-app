@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { TQuestion } from '../../../core/types';
-import { useRequestStatus } from '../../../hooks';
-import { quizFetcher, quizStorage } from '../../../lib';
+import { TQuestion } from 'core/types';
+import { useRequestStatus } from 'hooks';
+import { quizFetcher, quizStorage } from 'lib';
 
 export const useQuiz = () => {
   const navigate = useNavigate();

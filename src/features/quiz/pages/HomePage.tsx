@@ -1,4 +1,4 @@
-import { Button, Title, Text } from '../../../components';
+import { Button, Title, Text } from 'components';
 
 import { useQuizHome } from '../hooks';
 import { QuizInProgressModal } from '../components';
