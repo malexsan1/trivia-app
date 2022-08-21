@@ -15,20 +15,25 @@ export const useQuiz = () => {
 
   const [questions, setQuestions] = React.useState<TQuestion[]>([]);
 
-  const handleAnswer = (answer: boolean) => {
-    questions[currentQuestionIndex].answer = String(answer);
-    setQuestions(questions);
-    quizStorage.saveQuestions(questions);
+  const goBack = React.useCallback(() => navigate('/'), [navigate]);
 
-    if (currentQuestionIndex === questions.length - 1) {
-      navigate('/results', { state: { questions } });
+  const handleAnswer = React.useCallback(
+    (answer: boolean) => {
+      questions[currentQuestionIndex].answer = String(answer);
+      setQuestions(questions);
+      quizStorage.saveQuestions(questions);
 
-      quizStorage.clear();
-    } else {
-      setCurrentQuestionIndex((idx) => idx + 1);
-      quizStorage.setActiveIndex(currentQuestionIndex + 1);
-    }
-  };
+      if (currentQuestionIndex === questions.length - 1) {
+        navigate('/results', { state: { questions } });
+
+        quizStorage.clear();
+      } else {
+        setCurrentQuestionIndex((idx) => idx + 1);
+        quizStorage.setActiveIndex(currentQuestionIndex + 1);
+      }
+    },
+    [navigate, questions, currentQuestionIndex],
+  );
 
   const fetchNewQuestions = React.useCallback(async () => {
     setRequestStatus({ error: '', status: 'loading' });
@@ -53,6 +58,7 @@ export const useQuiz = () => {
     } else {
       fetchNewQuestions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
@@ -60,6 +66,8 @@ export const useQuiz = () => {
     isLoading,
     currentQuestionIndex,
     currentQuestion: questions[currentQuestionIndex] ?? {},
+    goBack,
     handleAnswer,
+    fetchNewQuestions,
   };
 };

@@ -13,7 +13,7 @@ export const HomePage = () => {
         Welcome to the Trivia Challenge!
       </Title>
 
-      <div className="flex flex-col flex-1 justify-center items-center space-y-8">
+      <div className="flex flex-col flex-1 justify-center items-center space-y-8 text-center">
         <Text level="1">
           You will be presented with 10{' '}
           <Text level="1" as="span" className="font-semibold text-green-600">
@@ -29,7 +29,7 @@ export const HomePage = () => {
         <Text level="1">Can you score 100%?</Text>
       </div>
 
-      <Button className="self-center w-1/6" onClick={handleQuizStart}>
+      <Button className="self-center w-full sm:w-1/4 xl:w-1/6" onClick={handleQuizStart}>
         BEGIN
       </Button>
 

@@ -22,13 +22,14 @@ export const ResultItem: React.FC<ResultItemProps> = ({ answer, correctAnswer, q
         )}
       </div>
 
-      <div className="space-y-2">
+      <div>
         <Text level="2" dangerouslySetInnerHTML={{ __html: question }} />
 
         {!isCorrect && (
-          <Text level="3">
-            Your answer: {capitalize(answer)}. The correct answer: {capitalize(correctAnswer)}
-          </Text>
+          <div className="grid grid-cols-1">
+            <Text level="3">Your answer: {capitalize(answer)}</Text>
+            <Text level="3">The correct answer: {capitalize(correctAnswer)}</Text>
+          </div>
         )}
       </div>
     </div>

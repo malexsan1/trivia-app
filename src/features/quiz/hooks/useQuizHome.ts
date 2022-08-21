@@ -6,7 +6,7 @@ import { quizStorage } from '../../../lib';
 export const useQuizHome = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const isQuizInProgress = React.useMemo(() => quizStorage.questionIndex, []);
+  const isQuizInProgress = React.useMemo(() => quizStorage.questions.length > 0, []);
 
   const handleQuizStart = () => {
     if (isQuizInProgress) {

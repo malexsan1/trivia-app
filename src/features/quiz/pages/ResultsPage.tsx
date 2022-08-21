@@ -6,7 +6,7 @@ export const ResultsPage = () => {
   const { numberOfCorrectAnswers, questions, handlePlayAgain } = useResults();
 
   return (
-    <div className="flex flex-col space-y-16 pb-8">
+    <div className="flex flex-col flex-1 space-y-6 lg:space-y-12 pb-8">
       <div>
         <Title level="2" className="text-center">
           You scored
@@ -18,7 +18,7 @@ export const ResultsPage = () => {
         >{`${numberOfCorrectAnswers} / ${questions.length}`}</Title>
       </div>
 
-      <div className="flex flex-col justify-center flex-1 space-y-12">
+      <div className="flex flex-col justify-start flex-1 space-y-4 sm:space-y-8 lg:space-y-12">
         {questions.map((question) => (
           <ResultItem
             key={question.question}
@@ -29,7 +29,7 @@ export const ResultsPage = () => {
         ))}
       </div>
 
-      <Button onClick={handlePlayAgain} className="w-1/4 self-center uppercase">
+      <Button onClick={handlePlayAgain} className="w-full sm:w-1/2 self-center uppercase">
         Play again?
       </Button>
     </div>
